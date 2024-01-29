@@ -11,11 +11,14 @@ export function useCrossOriginMessages() {
 
   const postMessage = useCallback(({ type, message }: CrossOriginMessage) => {
     console.log("guest sending", { type, message });
-    window.parent.postMessage({
-      type,
-      message,
-      source: "@app-name",
-    });
+    window.parent.postMessage(
+      {
+        type,
+        message,
+        source: "@app-name",
+      },
+      "*"
+    );
   }, []);
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export function useCrossOriginMessages() {
         return;
       setHostMessage(event.data);
     };
-    window.addEventListener("message", onMessage);
+    window.addEventListener("message", onMessage, false);
 
     return () => {
       window.removeEventListener("message", onMessage);
