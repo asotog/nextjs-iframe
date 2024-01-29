@@ -3,7 +3,11 @@ import { useCrossOriginMessages } from "@/useCrossOriginMessages";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { postMessage } = useCrossOriginMessages();
+  const { postMessage, hostMessage } = useCrossOriginMessages();
+  useEffect(() => {
+    console.log("host message received", hostMessage);
+  }, [hostMessage]);
+
   useEffect(() => {
     postMessage({
       type: "initialized",

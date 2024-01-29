@@ -29,7 +29,6 @@ export function useCrossOriginMessages() {
       //  if (event.origin !== "http://example.com") return;
       if (event.data?.source !== "@app-name") return;
       setHostMessage(event.data);
-      console.log(event.data);
     };
     window.addEventListener("message", onMessage);
 
