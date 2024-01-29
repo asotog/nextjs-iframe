@@ -27,7 +27,11 @@ export function useCrossOriginMessages() {
       // Do we trust the sender of this message?  (might be
       // different from what we originally opened, for example).
       //  if (event.origin !== "http://example.com") return;
-      if (event.data?.source !== "@app-name") return;
+      if (
+        event.data?.source !== "@app-name" ||
+        event.origin === window.location.origin
+      )
+        return;
       setHostMessage(event.data);
     };
     window.addEventListener("message", onMessage);
